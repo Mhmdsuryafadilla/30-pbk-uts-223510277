@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <h1>Daftar Kegiatan</h1>
+    <h1>Daftar Kegiatanku</h1>
     <div class="add-activity">
       <input v-model="newActivity" type="text" placeholder="Tambahkan kegiatan baru" />
       <button @click="addActivity">Tambah</button>
