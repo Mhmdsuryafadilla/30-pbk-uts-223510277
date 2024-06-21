@@ -3,28 +3,30 @@
     <header>
       <nav>
         <ul>
-          <li @click="activeMenu = 'post'" :class="{ active: activeMenu === 'post' }">Post</li>
-          <li @click="activeMenu = 'todos'" :class="{ active: activeMenu === 'todos' }">Todos</li>
+          <li :class="{ 'active': activeMenu === 'post' }" @click="navigateTo('post')">Post</li>
+          <li :class="{ 'active': activeMenu === 'todos' }" @click="navigateTo('todos')">Todos</li>
+          <li :class="{ 'active': activeMenu === 'album' }" @click="navigateTo('album')">Album</li>
         </ul>
       </nav>
     </header>
 
-    <div v-if="activeMenu === 'todos'">
-      <TodoComponent />
-    </div>
-
-    <div v-else-if="activeMenu === 'post'">
-      <PostComponent />
+    <div class="main-content">
+      <router-view />
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import PostComponent from './components/PostComponent.vue';
-import TodoComponent from './components/TodoComponent.vue';
+import { useRouter } from 'vue-router';
 
-const activeMenu = ref('todos');
+const activeMenu = ref('post'); // Menu aktif default saat aplikasi dimuat
+const router = useRouter();
+
+const navigateTo = (menu) => {
+  activeMenu.value = menu;
+  router.push({ path: `/${menu}` }); // Menggunakan router untuk navigasi antar komponen
+};
 </script>
 
 <style scoped>
@@ -37,20 +39,36 @@ const activeMenu = ref('todos');
 
 header {
   margin-bottom: 20px;
+  background-color: #314c69;
+  color: white;
 }
 
 nav ul {
   list-style-type: none;
   padding: 0;
+  display: flex;
 }
 
 nav ul li {
-  display: inline-block;
-  margin-right: 20px;
   cursor: pointer;
+  padding: 10px 20px;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom-color 0.3s;
 }
 
 nav ul li.active {
-  font-weight: bold;
+  border-bottom-color: white;
+}
+
+nav ul li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-content {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
 }
 </style>
