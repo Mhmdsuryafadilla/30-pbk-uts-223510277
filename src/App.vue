@@ -1,74 +1,88 @@
 <template>
-  <div class="app">
+  <div id="app">
     <header>
-      <nav>
-        <ul>
-          <li :class="{ 'active': activeMenu === 'post' }" @click="navigateTo('post')">Post</li>
-          <li :class="{ 'active': activeMenu === 'todos' }" @click="navigateTo('todos')">Todos</li>
-          <li :class="{ 'active': activeMenu === 'album' }" @click="navigateTo('album')">Album</li>
-        </ul>
-      </nav>
+      <div class="tabs">
+        <div
+          v-for="tab in tabs"
+          :key="tab.path"
+          @click="navigateTo(tab.path)"
+          :class="{ 'active': currentRoute === tab.path }"
+        >
+          {{ tab.label }}
+        </div>
+      </div>
     </header>
 
-    <div class="main-content">
-      <router-view />
-    </div>
+    <router-view></router-view>
+
+    <footer>
+    </footer>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
-const activeMenu = ref('post'); // Menu aktif default saat aplikasi dimuat
 const router = useRouter();
+const currentRoute = useRoute().path;
 
-const navigateTo = (menu) => {
-  activeMenu.value = menu;
-  router.push({ path: `/${menu}` }); // Menggunakan router untuk navigasi antar komponen
+const tabs = [
+  { path: '/posts', label: 'Posts' },
+  { path: '/todos', label: 'Todos' },
+  { path: '/albums', label: 'Albums' },
+];
+
+const navigateTo = (path) => {
+  router.push(path);
 };
 </script>
 
 <style scoped>
-.app {
+#app {
+  font-family: Arial, sans-serif;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
 }
 
 header {
   margin-bottom: 20px;
-  background-color: #314c69;
-  color: white;
 }
 
-nav ul {
-  list-style-type: none;
-  padding: 0;
+.tabs {
   display: flex;
+  background-color: #eeeeee;
+  border-bottom: 1px solid #dddddd;
 }
 
-nav ul li {
+.tabs > div {
+  padding: 12px 20px;
   cursor: pointer;
-  padding: 10px 20px;
-  border-bottom: 2px solid transparent;
-  transition: border-bottom-color 0.3s;
+  color: #555555;
+  font-weight: bold;
+  border-left: 1px solid transparent;
+  transition: border-left-color 0.3s ease;
 }
 
-nav ul li.active {
-  border-bottom-color: white;
+.tabs > div:hover {
+  background-color: #1ab587;
 }
 
-nav ul li:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.tabs > div.active {
+  background-color: #ffffff;
+  border-left-color: #007bff;
 }
 
-.main-content {
-  background-color: #f8f9fa;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 0 0 5px 5px;
+.tabs > div:not(:last-child) {
+  margin-right: 0;
+}
+
+router-view {
+  margin-top: 20px;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
 }
 </style>

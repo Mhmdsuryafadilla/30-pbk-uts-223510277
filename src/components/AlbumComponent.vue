@@ -30,7 +30,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 
-const selectedUser = ref(1); // Default to the first user
+const selectedUser = ref(1); 
 const users = ref([]);
 const albums = ref([]);
 const lightboxPhoto = ref(null);
@@ -76,11 +76,11 @@ const closeLightbox = () => {
 .photos {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Menambahkan jarak antar foto */
+  gap: 10px; 
 }
 
 .photo {
-  width: calc(20% - 10px); /* 5 foto per baris, dikurangi margin */
+  width: calc(20% - 10px); 
   box-sizing: border-box;
   margin-bottom: 10px;
   padding: 5px;

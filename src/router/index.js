@@ -1,17 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import PostComponent from '../components/PostComponent.vue';
-import TodoComponent from '../components/TodoComponent.vue';
-import AlbumComponent from '../components/AlbumComponent.vue';
+import { createRouter, createWebHistory } from 'vue-router'
+import TodoComponent from '../components/TodoComponent.vue'
+import PostComponent from '../components/PostComponent.vue'
+import AlbumComponent from '../components/AlbumComponent.vue'
 
 const routes = [
-  { path: '/post', component: PostComponent },
+  { path: '/', component: PostComponent }, // Halaman default untuk '/'
+  { path: '/posts', component: PostComponent },
   { path: '/todos', component: TodoComponent },
-  { path: '/album', component: AlbumComponent },
-];
+  { path: '/albums', component: AlbumComponent },
+  // tambahkan rute lainnya jika diperlukan
+]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
-});
+  routes
+})
 
-export default router;
+export default router
