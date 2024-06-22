@@ -14,9 +14,6 @@
     </header>
 
     <router-view></router-view>
-
-    <footer>
-    </footer>
   </div>
 </template>
 
@@ -61,16 +58,19 @@ header {
   color: #555555;
   font-weight: bold;
   border-left: 1px solid transparent;
-  transition: border-left-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .tabs > div:hover {
-  background-color: #1ab587;
+  background-color: #1d2c28;
+  color: #ffffff;
+  border-left-color: #1ab587;
+  transform: scale(1.05);
 }
 
 .tabs > div.active {
   background-color: #ffffff;
-  border-left-color: #007bff;
+  border-left-color: #fdfdfd;
 }
 
 .tabs > div:not(:last-child) {
@@ -79,10 +79,5 @@ header {
 
 router-view {
   margin-top: 20px;
-}
-
-footer {
-  margin-top: 20px;
-  text-align: center;
 }
 </style>

@@ -72,7 +72,7 @@
   
   .add-activity button {
     padding: 8px;
-    background-color: #007bff;
+    background-color: #1d2c28;
     color: #fff;
     border: none;
     cursor: pointer;
